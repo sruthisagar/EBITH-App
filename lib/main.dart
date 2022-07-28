@@ -8,6 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:sru_apz/darter.dart';
 // import 'package:camerawesome/camerawesome_plugin.dart';
 
+void main()
+{
+  runApp(const Home());
+}
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -18,11 +22,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Starter(),
     );
   }
 }
+
+
 
 // class Camera extends StatefulWidget {
 //   const Camera({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:http/http.dart';
 
 Future<String> Post(String a) async {
-  final String apiUrl = "https://sushisaha.herokuapp.com/submit";
+  final String apiUrl = "http://10.0.2.2:5000/submit";
   try {
     final response = await post(Uri.parse(apiUrl), body: {
       "image": a,
