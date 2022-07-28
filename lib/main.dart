@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:async';
-
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:sru_apz/darter.dart';
