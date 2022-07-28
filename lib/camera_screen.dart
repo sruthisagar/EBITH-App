@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import './api.dart';
@@ -22,8 +23,14 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
+  final FlutterTts tts = FlutterTts();
+  final TextEditingController controller =
+      TextEditingController(text: "hello world");
+
   @override
   void initState() {
+    tts.setLanguage('en');
+    tts.setSpeechRate(0.4);
     initializeCamera(selectedCamera); //Initially selectedCamera = 0
     super.initState();
   }
@@ -92,12 +99,13 @@ class _CameraScreenState extends State<CameraScreen> {
                       ));
                     }
                   },
-                  icon: const Icon(Icons.switch_camera_rounded, color: Colors.white),
+                  icon: const Icon(Icons.switch_camera_rounded,
+                      color: Colors.white),
                 ),
                 GestureDetector(
                   onTap: () async {
-                    // print("object");
-                    // print("khjj");
+                    print("object");
+                    print("khjj");
                     await _initializeControllerFuture;
                     var xFile = await _controller.takePicture();
                     setState(() async {
@@ -106,10 +114,12 @@ class _CameraScreenState extends State<CameraScreen> {
                       Uint8List imagebytes =
                           await imagefile.readAsBytes(); //convert to bytes
                       String base64string = base64.encode(imagebytes);
-                      // print("hello"); //convert bytes to base64 string
-                      // print(base64string);
-                      String res = await (Post(base64string));
+                      print("hello"); //convert bytes to base64 string
+                      print(base64string);
+                      print(Post(base64string));
+                      controller.text = await Post(base64string);
                     });
+                    tts.speak(controller.text);
                   },
                   child: Container(
                     height: 60,
@@ -146,7 +156,12 @@ class _CameraScreenState extends State<CameraScreen> {
               ],
             ),
           ),
-          const Spacer(),
+          TextButton(
+              onPressed: () {
+                tts.speak(controller.text);
+                print(controller.text);
+              },
+              child: Text("hello"))
         ],
       ),
     );
