@@ -1,0 +1,17 @@
+import 'package:http/http.dart';
+
+Future<String> Post(String a) async {
+  final String apiUrl = "https://sushisaha.herokuapp.com/submit";
+  try {
+    final response = await post(Uri.parse(apiUrl), body: {
+      "image": a,
+    });
+    var output = response.body as String;
+    print(output);
+    print(response.body);
+    return output;
+  } catch (e) {
+    print(e);
+    return "Error";
+  }
+}
