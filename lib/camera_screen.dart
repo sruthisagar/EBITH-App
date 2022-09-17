@@ -108,18 +108,18 @@ class _CameraScreenState extends State<CameraScreen> {
                     print("khjj");
                     await _initializeControllerFuture;
                     var xFile = await _controller.takePicture();
-                    setState(() async {
-                      capturedImages.add(File(xFile.path));
-                      File imagefile = File(xFile.path); //convert Path to File
-                      Uint8List imagebytes =
-                          await imagefile.readAsBytes(); //convert to bytes
-                      String base64string = base64.encode(imagebytes);
-                      print("hello"); //convert bytes to base64 string
-                      print(base64string);
-                      print(Post(base64string));
-                      controller.text = await Post(base64string);
-                    });
-                    tts.speak(controller.text);
+                    capturedImages.add(File(xFile.path));
+                    File imagefile = File(xFile.path); //convert Path to File
+                    Uint8List imagebytes =
+                        await imagefile.readAsBytes(); //convert to bytes
+                    String base64string = base64.encode(imagebytes);
+                    print("hello"); //convert bytes to base64 string
+
+                    String text = await Post(base64string);
+                    
+                    FlutterTts Tts = new FlutterTts();
+                    Tts.speak(text);
+                    Tts.stop();
                   },
                   child: Container(
                     height: 60,
@@ -158,8 +158,9 @@ class _CameraScreenState extends State<CameraScreen> {
           ),
           TextButton(
               onPressed: () {
-                tts.speak(controller.text);
-                print(controller.text);
+                FlutterTts Tts = new FlutterTts();
+                    Tts.speak("Hello");
+                    Tts.stop();
               },
               child: Text("hello"))
         ],

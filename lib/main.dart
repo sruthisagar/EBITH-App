@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:sru_apz/darter.dart';
+import 'darter.dart';
 // import 'package:camerawesome/camerawesome_plugin.dart';
 
 void main()
